@@ -1,4 +1,4 @@
 /.vscode
-output*
-_*
+/output*.bmp
+/_*.*
 /vs/
