@@ -13,7 +13,7 @@ double ConvKernel[5][5] = {
 
 int main(int argc, const char *const *argv) {
 	if (argc != 3) {
-		printf("Usage: %s <input_bmp_file> <output_bmp_file\n", argv[0]);
+		printf("Usage: %s <input_bmp_file> <output_bmp_file>\n", argv[0]);
 		return 0;
 	}
 	bmp_img bi;
@@ -52,6 +52,7 @@ int main(int argc, const char *const *argv) {
 						}
 					}
 				}
+
 				buf[(y - start) * width + x] = (char)red;
 				buf[(y - start) * width + x + size] = (char)green;
 				buf[(y - start) * width + x + size + size] = (char)blue;
@@ -114,13 +115,14 @@ int main(int argc, const char *const *argv) {
 		}
 		double endTime = MPI_Wtime();
 		printf("total time: %lg\n", endTime - startTime);
+
+		err = bmp_img_write(&bi, argv[2]);
+		if (err != BMP_OK) {
+			fprintf(stderr, "BMP Write Error!\n");
+			return -1;
+		}
 	}
 	
-	err = bmp_img_write(&bi, argv[2]);
-	if (err != BMP_OK) {
-		fprintf(stderr, "BMP Write Error!\n");
-		return -1;
-	}
 	bmp_img_free(&bi);
 	MPI_Finalize();
 	return 0;
