@@ -1,3 +1,3 @@
-_test : test.c libbmp.c libbmp.h
-	$(CC) -o$@ $(filter-out %.h, $^)
+_mpi : mpi.c libbmp.c libbmp.h
+	mpicc -o$@ $(filter-out %.h, $^)
 
