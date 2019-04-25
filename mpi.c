@@ -34,7 +34,7 @@ int main(int argc, const char *const *argv) {
 		double stime = MPI_Wtime();
 		int start = (height + sz - 1) / sz * mr;
 		int end = start + (height + sz - 1) / sz - 1;
-		if (end > height)
+		if (end >= height)
 			end = height - 1;
 		int size = (end - start + 1) * width;
 		char *buf = malloc(3 * size * sizeof(char));
@@ -65,7 +65,7 @@ int main(int argc, const char *const *argv) {
 		double stime = MPI_Wtime();
 		int start = (height + sz - 1) / sz * mr;
 		int end = start + (height + sz - 1) / sz - 1;
-		if (end > height)
+		if (end >= height)
 			end = height - 1;
 		int size = (end - start + 1) * width;
 		char *buf = malloc(3 * size * sizeof(char));
@@ -100,7 +100,7 @@ int main(int argc, const char *const *argv) {
 		for (int i = 1; i < sz; i++) {
 			int start = (height + sz - 1) / sz * i;
 			int end = start + (height + sz - 1) / sz - 1;
-			if (end > height)
+			if (end >= height)
 				end = height - 1;
 			int size = (end - start + 1) * width;
 			MPI_Recv(buf, 3*size, MPI_CHAR, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
