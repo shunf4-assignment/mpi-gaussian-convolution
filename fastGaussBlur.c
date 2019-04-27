@@ -5,6 +5,8 @@
 #include <memory.h>
 #include "libbmp.h"
 
+#define min(x,y) x<y?x:y
+#define max(x,y) x<y?y:x
 
 void boxBlurH(bmp_img *src, bmp_img *dest, int width, int height) {
 	for (int i = 0; i < height; i++) {
