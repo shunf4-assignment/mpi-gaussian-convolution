@@ -53,9 +53,9 @@ int main(int argc, const char *const *argv) {
 					}
 				}
 
-				buf[(y - start) * width + x] = (char)red;
-				buf[(y - start) * width + x + size] = (char)green;
-				buf[(y - start) * width + x + size + size] = (char)blue;
+				buf[(y - start) * width + x] = (char)(red + 0.5);
+				buf[(y - start) * width + x + size] = (char)(green + 0.5);
+				buf[(y - start) * width + x + size + size] = (char)(blue + 0.5);
 			}
 		}
 		double etime = MPI_Wtime();
@@ -84,9 +84,9 @@ int main(int argc, const char *const *argv) {
 						}
 					}
 				}
-				buf[(y - start) * width + x] = (char)red;
-				buf[(y - start) * width + x + size] = (char)green;
-				buf[(y - start) * width + x + size + size] = (char)blue;
+				buf[(y - start) * width + x] = (char)(red + 0.5);
+				buf[(y - start) * width + x + size] = (char)(green + 0.5);
+				buf[(y - start) * width + x + size + size] = (char)(blue + 0.5);
 			}
 		}
 		double etime = MPI_Wtime();
