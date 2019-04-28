@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>
+#include <mpi.h>
 
 #define BMP_MAGIC 19778
 
