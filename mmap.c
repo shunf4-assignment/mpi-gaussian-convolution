@@ -38,7 +38,7 @@ typedef struct _bmp_pixel
 #define BMP_PIXEL(r,g,b) ((bmp_pixel){(b),(g),(r)})
 
 void bmp_img_read(const char *filename) {
-    int fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600);
+    int fd = open(filename, O_RDWR, (mode_t)0600);
     int res;
     bmp_header header;
 
