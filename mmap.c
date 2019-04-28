@@ -50,6 +50,7 @@ void bmp_img_read(const char *filename) {
     unsigned short magic;
     res = read(fd, &magic, sizeof(magic));
     if (res <= 0 || magic != BMP_MAGIC) {
+        fprintf(stderr, "%hu\n", magic)
         perror("Error reading magic || magic incorrect");
         exit(EXIT_FAILURE);
     }
