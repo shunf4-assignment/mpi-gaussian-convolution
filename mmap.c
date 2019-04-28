@@ -193,6 +193,8 @@ void process_bmp(const char *filename, const char *output) {
 
     close(fd);
     close(ofd);
+
+    MPI_Finalize();
 }
 
 int main(int argc, const char *const *argv) {
