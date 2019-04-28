@@ -75,6 +75,10 @@ void bmp_img_read(const char *filename) {
     printf("%u\n", header.biClrUsed);
     printf("%u\n", header.biClrImportant);
 
+    unsigned char *map = mmap(NULL, header.bfSize - sizeof(bmp_header) - sizeof(char), PROT_READ | PROT_WRITTEN, MAP_SHAERD, fd, sizeof(char) + sizeof(bmp_header));
+
+    printf("1st pixel: %hhu\n", map[0]);
+
 }
 
 int main() {
