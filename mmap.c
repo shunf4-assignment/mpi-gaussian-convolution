@@ -77,6 +77,12 @@ void bmp_img_read(const char *filename) {
 
     unsigned char *map = mmap(NULL, header.bfSize - sizeof(bmp_header) - sizeof(char), PROT_READ | PROT_WRITE, MAP_SHARED, fd, sizeof(char) + sizeof(bmp_header));
 
+    if (map == MAP_FAILED) {
+        close(fd);
+        perror("Error mmapping");
+        exit(EXIT_FAILURE);
+    }
+
     printf("1st pixel: %hhu\n", map[0]);
 
 }
