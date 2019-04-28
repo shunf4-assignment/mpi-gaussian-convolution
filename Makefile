@@ -7,4 +7,4 @@ _gauss : fastGaussBlur.c libbmp.c libbmp.h
 	mpicc -o$@ -O2 $(filter-out %.h, $^) -lm
 
 _mmap : mmap.c
-	cc -o$@ -O2 $(filter-out %.h, $^) -lm
+	mpicc -o$@ -O2 $(filter-out %.h, $^)
