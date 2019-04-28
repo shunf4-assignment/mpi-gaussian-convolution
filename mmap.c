@@ -114,7 +114,7 @@ void process_bmp(const char *filename, const char *output) {
     unsigned char *omap = mmap(NULL, header.bfSize, PROT_READ | PROT_WRITE, MAP_SHARED, ofd, 0);
     if (omap == MAP_FAILED) {
         close(fd);
-        perror("Error mmapping");
+        perror("Error mmapping 2");
         exit(EXIT_FAILURE);
     }
 
