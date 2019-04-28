@@ -1,4 +1,4 @@
-all : _mpi _gauss
+all : _mpi _gauss _mmap
 
 _mpi : mpi.c libbmp.c libbmp.h
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
