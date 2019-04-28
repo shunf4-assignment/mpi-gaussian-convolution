@@ -110,19 +110,21 @@ void process_bmp(const char *filename, const char *output) {
 
     lseek(ofd, header.bfSize - 1, SEEK_SET);
     write(ofd, "", 1);
-    unsigned char *outmap = mmap(NULL, header.bfSize, PROT_READ | PROT_WRITE, MAP_SHARED, ofd, 0);
-    if (outmap == MAP_FAILED) {
+    unsigned char *omap = mmap(NULL, header.bfSize, PROT_READ | PROT_WRITE, MAP_SHARED, ofd, 0);
+    if (omap == MAP_FAILED) {
         close(fd);
         perror("Error mmapping");
         exit(EXIT_FAILURE);
     }
 
-    unsigned char *obmpdata = outmap + sizeof(char) + sizeof(bmp_header);
+    unsigned char *obmpdata = omap + sizeof(char) + sizeof(bmp_header);
 
     unsigned rowbytes = header.biWidth * 3 + header.biWidth % 4;
 
     int sz;
 	int mr;
+    int width = header.biWidth;
+    int height = header.biHeight;
 	MPI_Init(NULL, NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &sz);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mr);
