@@ -69,11 +69,12 @@ int main(int argc, const char *const *argv) {
 	int width = bi.img_header.biWidth, height = bi.img_header.biHeight;
 	bmp_img bi2;
 	enum bmp_error err2;
-	err2 = bmp_img_read(&bi2, argv[1]);
-	if (err2 != BMP_OK) {
-		fprintf(stderr, "BMP Read Error!\n");
-		return -1;
-	}
+	// err2 = bmp_img_read(&bi2, argv[1]);
+	// if (err2 != BMP_OK) {
+	// 	fprintf(stderr, "BMP Read Error!\n");
+	// 	return -1;
+	// }
+	err2=bmp_img_copy(&bi,&bi2);
 	printf("read end\n");
 	gaussBlur(&bi, &bi2, width, height);
 	printf("blur end\n");

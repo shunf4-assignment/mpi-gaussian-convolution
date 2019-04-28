@@ -79,4 +79,7 @@ enum bmp_error  bmp_img_write                  (const bmp_img*,
 enum bmp_error  bmp_img_read                   (bmp_img*,
                                                 const char*);
 
+enum bmp_error	bmp_img_copy 				   (bmp_img*,
+												bmp_img*);
+
 #endif /* __LIBBMP_H__ */
