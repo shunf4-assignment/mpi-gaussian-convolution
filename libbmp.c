@@ -3,6 +3,7 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "libbmp.h"
 
 // BMP_HEADER
@@ -219,5 +220,15 @@ bmp_img_read (bmp_img    *img,
 	
 	// NOTE: All good!
 	fclose (img_file);
+	return BMP_OK;
+}
+
+enum bmp_error
+bmp_img_copy (bmp_img    *img_src,
+              bmp_img    *img_dest)
+{
+	img_dest->img_header=img_src->img_header;
+	bmp_img_alloc (img_dest);
+	memcpy(img_dest->img_pixels[0],img_src->img_pixels[0],img_src->img_header.biHeight*img_src->img_header.biWidth*sizeof(bmp_pixel));
 	return BMP_OK;
 }
