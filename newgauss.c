@@ -112,7 +112,7 @@ void process_bmp(const char *filename, const char *output) {
     // mmap 输入文件
     unsigned char *map = mmap(NULL, header.bfSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 
-    unsigned char *bmpdata = map + sizeof(char) + sizeof(bmp_header);
+    unsigned char *bmpdata = map + sizeof(short) + sizeof(bmp_header);
 
     if (map == MAP_FAILED) {
         close(fd);
@@ -130,7 +130,7 @@ void process_bmp(const char *filename, const char *output) {
         exit(EXIT_FAILURE);
     }
 
-    unsigned char *obmpdata = omap + sizeof(char) + sizeof(bmp_header);
+    unsigned char *obmpdata = omap + sizeof(short) + sizeof(bmp_header);
 
     unsigned rowbytes = header.biWidth * 3 + /* padding = 4 - header.biWidth * 3 % 4 = */ header.biWidth % 4;
 
@@ -325,7 +325,7 @@ done:
     } else {
 		int recv;
 
-        memcpy(omap, map, sizeof(char) + sizeof(bmp_header));
+        memcpy(omap, map, sizeof(short) + sizeof(bmp_header));
 
 		for (int i = 1; i < sz; i++) {
 			MPI_Recv(&recv, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
