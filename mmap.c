@@ -55,7 +55,7 @@ typedef struct _bmp_pixel
 
 void process_bmp(const char *filename, const char *output) {
     int fd = open(filename, O_RDWR, (mode_t)0600);
-    int ofd = open(output, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600);
+    int ofd = open(output, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0660);
     int res;
     bmp_header header;
 

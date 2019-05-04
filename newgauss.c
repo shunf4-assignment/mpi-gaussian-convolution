@@ -63,7 +63,7 @@ typedef struct _bmp_pixel
 // mmap 的方法本质上是各进程在读取文件时, 直接把内存中的页缓存拿出来给应用程序用
 void process_bmp(const char *filename, const char *output) {
     int fd = open(filename, O_RDWR, (mode_t)0600);
-    int ofd = open(output, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600);
+    int ofd = open(output, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0660);
     int res;
     bmp_header header;
 
