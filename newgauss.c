@@ -309,14 +309,10 @@ ygreaterthan2:
             blue +=     weight_table[x04][*(PIX(y + 2, x + 2) BLUE)];
 
 done:
-            if (x == width - 3 || x == width - 2 || x == width - 1) {
-                printf("%d: %lg %lg %lg, ", x, red, green, blue);
-            }
             *(OPIX(y, x) RED) = (char)red;
             *(OPIX(y, x) GREEN) = (char)green;
             *(OPIX(y, x) BLUE) = (char)blue;
         }
-        printf("\n");
     }
 
     if (mr != 0) {

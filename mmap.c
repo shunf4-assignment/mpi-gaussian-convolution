@@ -80,6 +80,7 @@ void process_bmp(const char *filename, const char *output) {
         exit(EXIT_FAILURE);
     }
 
+#if 0
     printf("%u\n", header.bfSize);
     printf("%u\n", header.bfOffBits);
     printf("%u\n", header.biSize);
@@ -93,6 +94,7 @@ void process_bmp(const char *filename, const char *output) {
     printf("%d\n", header.biYPelsPerMeter);
     printf("%u\n", header.biClrUsed);
     printf("%u\n", header.biClrImportant);
+#endif
 
     if (header.biWidth < 0 || header.biBitCount != 24 || header.biCompression != 0 || header.biClrUsed != 0) {
         fprintf(stderr, "BMP format error\n");
