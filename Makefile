@@ -9,6 +9,9 @@ _gauss : fastGaussBlur.c libbmp.c libbmp.h
 _mmap : mmap.c
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
 
+_newgauss : newgauss.c
+	mpicc -o$@ -O2 $(filter-out %.h, $^)
+
 _newvalid : newvalid.cpp
 	g++ $^ -o $@ `pkg-config --cflags --libs opencv`
 
