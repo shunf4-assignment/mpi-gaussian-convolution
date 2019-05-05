@@ -15,7 +15,7 @@ _mmap : mmap.c
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
 
 _mmaptable : mmaptable.c
-	mpicc -o$@ -O2 $(filter-out %.h, $^)
+	mpicc -o$@ -O3 $(filter-out %.h, $^)
 
 _newfastgauss : newfastgauss.c libbmp.c libbmp.h
 	mpicc -o$@ -O2 $(filter-out %.h, $^) -lm
