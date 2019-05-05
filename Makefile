@@ -17,7 +17,7 @@ _mmap : mmap.c
 _newgauss : newgauss.c
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
 
-_newfastgauss : box.c
+_newfastgauss : box.c libbmp.c libbmp.h
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
 
 _newvalid : newvalid.cpp
