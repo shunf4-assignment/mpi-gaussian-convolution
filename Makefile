@@ -18,7 +18,7 @@ _newgauss : newgauss.c
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
 
 _newfastgauss : box.c libbmp.c libbmp.h
-	mpicc -o$@ -O2 $(filter-out %.h, $^)
+	mpicc -o$@ -O2 -lm $(filter-out %.h, $^)
 
 _newvalid : newvalid.cpp
 	g++ $^ -o $@ `pkg-config --cflags --libs opencv`
