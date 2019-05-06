@@ -328,12 +328,12 @@ done:
     }
 
     if (mr != 0) {
-        MPI_Send(&send, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+        //MPI_Send(&send, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
     } else {
         memcpy(omap, map, sizeof(short) + sizeof(bmp_header));
 
 		for (int i = 1; i < sz; i++) {
-			MPI_Recv(&recv, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			//MPI_Recv(&recv, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 		}
 		
         // 如果是应用到真的独立内存机器上, 须做如下改进:
