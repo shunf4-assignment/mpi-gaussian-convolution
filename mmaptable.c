@@ -139,7 +139,7 @@ void process_bmp(const char *filename, const char *output) {
         write(ofd, "", 1);
     }
 
-    MPI_Barrier(MPI_COMMON_WORLD);
+    MPI_Barrier(MPI_COMM_WORLD);
 
     unsigned char *omap = mmap(NULL, header.bfSize, PROT_READ | PROT_WRITE, MAP_SHARED, ofd, 0);
     if (omap == MAP_FAILED) {
