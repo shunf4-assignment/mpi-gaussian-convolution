@@ -364,7 +364,7 @@ done:
     
     double etime = MPI_Wtime();
 	printf("Process %d time: %lg\n", mr, etime - stime);
-    printf("Process %d time (except MPI initialization): %lg\n", my_rank, etime - stime_aftermpiinit);
+    printf("Process %d time (except MPI initialization): %lg\n", mr, etime - stime_aftermpiinit);
 
     MPI_Finalize();
 }
