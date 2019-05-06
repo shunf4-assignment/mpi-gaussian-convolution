@@ -54,6 +54,8 @@ typedef struct _bmp_pixel
 #define BMP_PIXEL(r,g,b) ((bmp_pixel){(b),(g),(r)})
 
 void process_bmp(const char *filename, const char *output) {
+    double stime = MPI_Wtime();
+
     int fd = open(filename, O_RDWR, (mode_t)0600);
     int ofd = open(output, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0660);
     int res;
@@ -196,6 +198,8 @@ void process_bmp(const char *filename, const char *output) {
     close(fd);
     close(ofd);
 
+    double etime = MPI_Wtime();
+	printf("Process %d time: %lg\n", mr, etime - stime);
     MPI_Finalize();
 }
 

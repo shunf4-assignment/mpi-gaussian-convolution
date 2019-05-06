@@ -25,6 +25,8 @@ int main(int argc, const char *const *argv)
 	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
+	double stime = MPI_Wtime();
+
 	//进程通信发送 or 接收数据区
 	unsigned char*img_list=NULL;	
 	int send_size[2];
@@ -248,7 +250,11 @@ int main(int argc, const char *const *argv)
 		unsigned char*main_list = (unsigned char*)malloc(height*width * 3 * sizeof(char));
 		MPI_Gather(local_img_temp, real_size * 3, MPI_CHAR, main_list, real_size * 3, MPI_CHAR, 0, MPI_COMM_WORLD);
 	}
+	
+	double etime = MPI_Wtime();
+	printf("Process %d time: %lg\n", mr, etime - stime);
 	MPI_Finalize();
+
 	return 0;
 }
 

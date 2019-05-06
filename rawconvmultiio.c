@@ -59,8 +59,8 @@ int main(int argc, const char *const *argv) {
 			}
 		}
 		double etime = MPI_Wtime();
-		printf("process%d time: %lg\n", mr, etime - stime);
 		MPI_Send(buf, 3 * size, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
+		printf("Process %d time: %lg\n", mr, etime - stime);
 	}
 	else {
 		double stime = MPI_Wtime();
@@ -89,8 +89,7 @@ int main(int argc, const char *const *argv) {
 				buf[(y - start) * width + x + size + size] = (char)(blue + 0.5);
 			}
 		}
-		double etime = MPI_Wtime();
-		printf("process0 time: %lg\n", etime - stime);
+		
 		for (int y = start; y <= end; y++) {
 			for (int x = 0; x < width; x++) {
 				bi.img_pixels[y][x].red = buf[(y - start) * width + x];
@@ -113,14 +112,19 @@ int main(int argc, const char *const *argv) {
 				}
 			}
 		}
-		double endTime = MPI_Wtime();
-		printf("total time: %lg\n", endTime - startTime);
+		
+		
 
 		err = bmp_img_write(&bi, argv[2]);
 		if (err != BMP_OK) {
 			fprintf(stderr, "BMP Write Error!\n");
 			return -1;
 		}
+
+		double etime = MPI_Wtime();
+		printf("Process 0 time: %lg\n", etime - stime);
+		double endTime = MPI_Wtime();
+		printf("total time: %lg\n", endTime - startTime);
 	}
 	
 	bmp_img_free(&bi);
