@@ -62,7 +62,8 @@ typedef struct _bmp_pixel
 
 // mmap 的方法本质上是各进程在读取文件时, 直接把内存中的页缓存拿出来给应用程序用
 void process_bmp(const char *filename, const char *output) {
-    double stime = MPI_Wtime();
+    double stime = 0;
+    //double stime = MPI_Wtime();
 
     int sz;
 	int mr;
@@ -70,7 +71,8 @@ void process_bmp(const char *filename, const char *output) {
 	MPI_Comm_size(MPI_COMM_WORLD, &sz);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mr);
 
-    double stime_aftermpiinit = MPI_Wtime();
+    double stime_aftermpiinit = 0;
+    //double stime_aftermpiinit = MPI_Wtime();
 
     int fd = open(filename, O_RDWR, (mode_t)0600);
     int ofd = open(output, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0660);
@@ -362,7 +364,8 @@ done:
     close(fd);
     close(ofd);
     
-    double etime = MPI_Wtime();
+    double etime = 0;
+    //double etime = MPI_Wtime();
 	printf("Process %d time: %lg\n", mr, etime - stime);
     printf("Process %d time (except MPI initialization): %lg\n", mr, etime - stime_aftermpiinit);
 
