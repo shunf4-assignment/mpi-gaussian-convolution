@@ -126,6 +126,9 @@ void process_bmp(const char *filename, const char *output) {
 
     unsigned char *bmpdata = map + sizeof(short) + sizeof(bmp_header);
 
+    int send = 1;
+    int recv;
+
     if (map == MAP_FAILED) {
         close(fd);
         perror("Error mmapping in file");
@@ -325,11 +328,8 @@ done:
     }
 
     if (mr != 0) {
-        int send = 1;
         MPI_Send(&send, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
     } else {
-		int recv;
-
         memcpy(omap, map, sizeof(short) + sizeof(bmp_header));
 
 		for (int i = 1; i < sz; i++) {
