@@ -1,14 +1,14 @@
-all : _newrawconv _oldfastgauss _mmap _newvalid _mmaptable _newfastgauss _newfastgauss_motion
+all : _rawconvmultiio _rawconvscatter _oldfastgauss _mmap _newvalid _mmaptable _newfastgauss _newfastgauss_motion
 
 .PHONY : clean
 
 clean :
 	$(RM) -f _*
 
-_rawconv : rawconv.c libbmp.c libbmp.h
+_rawconvmultiio : rawconvmultiio.c libbmp.c libbmp.h
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
 
-_newrawconv : newrawconv.c libbmp.c libbmp.h
+_rawconvscatter : rawconvscatter.c libbmp.c libbmp.h
 	mpicc -o$@ -O2 $(filter-out %.h, $^)
 
 _oldfastgauss : oldfastgauss.c libbmp.c libbmp.h
