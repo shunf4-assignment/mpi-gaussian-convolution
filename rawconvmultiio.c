@@ -12,6 +12,8 @@ double ConvKernel[5][5] = {
 };
 
 int main(int argc, const char *const *argv) {
+	double startTime = MPI_Wtime();
+	double stime = MPI_Wtime();
 	if (argc != 3) {
 		printf("Usage: %s <input_bmp_file> <output_bmp_file>\n", argv[0]);
 		return 0;
@@ -29,9 +31,8 @@ int main(int argc, const char *const *argv) {
 	MPI_Init(NULL, NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &sz);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mr);
-	double startTime = MPI_Wtime();
+	
 	if (mr != 0) {
-		double stime = MPI_Wtime();
 		int start = (height + sz - 1) / sz * mr;
 		int end = start + (height + sz - 1) / sz - 1;
 		if (end >= height)

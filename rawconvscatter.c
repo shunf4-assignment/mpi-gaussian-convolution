@@ -19,13 +19,15 @@ int main(int argc, const char *const *argv)
 		return 0;
 	}
 
+	double stime = MPI_Wtime();
+
 	int comm_sz;
 	int my_rank;
 	MPI_Init(NULL, NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz);
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 
-	double stime = MPI_Wtime();
+	double stime_aftermpiinit = MPI_Wtime();
 
 	//进程通信发送 or 接收数据区
 	unsigned char*img_list=NULL;	
@@ -253,6 +255,7 @@ int main(int argc, const char *const *argv)
 	
 	double etime = MPI_Wtime();
 	printf("Process %d time: %lg\n", my_rank, etime - stime);
+	printf("Process %d time (except MPI initialization): %lg\n", my_rank, etime - stime_aftermpiinit);
 	MPI_Finalize();
 
 	return 0;
