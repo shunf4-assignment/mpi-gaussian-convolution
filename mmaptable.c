@@ -62,8 +62,7 @@ typedef struct _bmp_pixel
 
 // mmap 的方法本质上是各进程在读取文件时, 直接把内存中的页缓存拿出来给应用程序用
 void process_bmp(const char *filename, const char *output) {
-    double stime = 0;
-    //double stime = MPI_Wtime();
+    double stime = MPI_Wtime();
 
     int sz;
 	int mr;
@@ -71,8 +70,7 @@ void process_bmp(const char *filename, const char *output) {
 	MPI_Comm_size(MPI_COMM_WORLD, &sz);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mr);
 
-    double stime_aftermpiinit = 0;
-    //double stime_aftermpiinit = MPI_Wtime();
+    double stime_aftermpiinit = MPI_Wtime();
 
     int fd = open(filename, O_RDWR, (mode_t)0600);
     int ofd = open(output, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0660);
@@ -135,9 +133,14 @@ void process_bmp(const char *filename, const char *output) {
         exit(EXIT_FAILURE);
     }
 
-    // 扩充输出文件的大小, 然后 mmap
-    lseek(ofd, header.bfSize - 1, SEEK_SET);
-    write(ofd, "", 1);
+    if (mr == 0) {
+        // 扩充输出文件的大小, 然后 mmap
+        lseek(ofd, header.bfSize - 1, SEEK_SET);
+        write(ofd, "", 1);
+    }
+
+    MPI_Barrier(MPI_COMMON_WORLD);
+
     unsigned char *omap = mmap(NULL, header.bfSize, PROT_READ | PROT_WRITE, MAP_SHARED, ofd, 0);
     if (omap == MAP_FAILED) {
         close(fd);
@@ -361,8 +364,7 @@ done:
     close(fd);
     close(ofd);
     
-    double etime = 0;
-    //double etime = MPI_Wtime();
+    double etime = MPI_Wtime();
 	printf("Process %d time: %lg\n", mr, etime - stime);
     printf("Process %d time (except MPI initialization): %lg\n", mr, etime - stime_aftermpiinit);
 
