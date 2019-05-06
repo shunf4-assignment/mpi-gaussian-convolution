@@ -1,4 +1,4 @@
-all : _rawconv _oldfastgauss _mmap _newvalid _mmaptable _newfastgauss
+all : _rawconv _oldfastgauss _mmap _newvalid _mmaptable _newfastgauss _newfastgauss_motion
 
 .PHONY : clean
 
@@ -22,4 +22,7 @@ _newfastgauss : newfastgauss.c libbmp.c libbmp.h
 
 _newvalid : newvalid.cpp
 	g++ $^ -o $@ `pkg-config --cflags --libs opencv`
+
+_newfastgauss_motion : newfastgauss_motion.c libbmp.c libbmp.h
+	mpicc -o$@ -O2 $(filter-out %.h, $^) -lm
 
