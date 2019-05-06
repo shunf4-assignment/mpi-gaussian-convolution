@@ -252,7 +252,7 @@ int main(int argc, const char *const *argv)
 	}
 	
 	double etime = MPI_Wtime();
-	printf("Process %d time: %lg\n", mr, etime - stime);
+	printf("Process %d time: %lg\n", my_rank, etime - stime);
 	MPI_Finalize();
 
 	return 0;
