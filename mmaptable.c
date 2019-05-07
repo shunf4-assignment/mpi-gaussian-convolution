@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -133,10 +134,12 @@ void process_bmp(const char *filename, const char *output) {
         exit(EXIT_FAILURE);
     }
 
-    if (mr == 0) {
+    if (1) {
         // 扩充输出文件的大小, 然后 mmap
         lseek(ofd, header.bfSize - 1, SEEK_SET);
         write(ofd, "", 1);
+        ftruncate(ofd, header.bfSize);
+        fsync(ofd);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
