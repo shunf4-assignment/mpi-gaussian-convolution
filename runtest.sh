@@ -4,6 +4,7 @@ if [ "x$1x" == "xx" ]; then
 	exit 1;
 fi
 
+rm output_$1.bmp
 time mpiexec -n 4 ./_$1 timg.bmp output_$1.bmp
 ./newvalid timg.bmp output_$1.bmp
 
